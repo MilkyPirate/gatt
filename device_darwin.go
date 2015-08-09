@@ -437,15 +437,17 @@ func (d *device) HandleXpcEvent(event xpc.Dict, err error) {
 	case // Peripheral events
 		54, // RSSIRead
 		55, // ServiceDiscovered
-		56, // ServiceDiscovered (based on noble package which works from my mac to Blend)
+		56, // ServiceDiscovered (yosemite/blend)
 		62, // IncludedServiceDiscovered
 		63, // CharacteristicsDiscovered
-		70, // CharacteristicRead
-		71, // CharacteristicWritten
+		64, // CharacteristicsDiscovered (yosemite/blend)
+		71, // CharacteristicRead (yosemite/blend)
+		72, // CharacteristicWritten (yosemite/blend)
 		73, // NotifyValueSet
 		75, // DescriptorsDiscovered
-		78, // DescriptorRead
-		79: // DescriptorWritten
+		76, // DescriptorsDiscovered (yosemite/blend)
+		79, // DescriptorRead (yosemite/blend)
+		80: // DescriptorWritten (yosemite/blend)
 
 		u := UUID{args.MustGetUUID("kCBMsgArgDeviceUUID")}
 		d.plistmu.Lock()

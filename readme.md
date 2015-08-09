@@ -1,14 +1,10 @@
 > paypal/gatt didn't work with Mac OSX Yosemite and [Blend board](http://redbearlab.com/blend/) whereas [noble](https://github.com/sandeepmistry/noble) did.
-> Based on the noble file [yosemite.js](https://github.com/sandeepmistry/noble/blob/master/lib/mac/yosemite.js), I added some MTU requests/responses.
-
-> Impacted files
+> MTU ids seems to be different on either Yosemite or Blend BLE (not sure which one).
+> I used the noble file [yosemite.js](https://github.com/sandeepmistry/noble/blob/master/lib/mac/yosemite.js) to guide me.
+>
+> Main impacted files
 > - github.com/flemay/gatt/device_darwin.go
 > - github.com/flemay/gatt/peripheral_darwin.go
-
-> MTU ids
-> - 53 peripheral connected response
-> - 45 discovered services request
-> - 56 discovered services response
 
 # Package gatt provides a Bluetooth Low Energy GATT implementation.
 

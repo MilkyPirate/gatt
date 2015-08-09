@@ -69,7 +69,7 @@ func (p *peripheral) DiscoverIncludedServices(ss []UUID, s *Service) ([]*Service
 }
 
 func (p *peripheral) DiscoverCharacteristics(cs []UUID, s *Service) ([]*Characteristic, error) {
-	rsp := p.sendReq(61, xpc.Dict{
+	rsp := p.sendReq(62, xpc.Dict{
 		"kCBMsgArgDeviceUUID":         p.id,
 		"kCBMsgArgServiceStartHandle": s.h,
 		"kCBMsgArgServiceEndHandle":   s.endh,
@@ -91,7 +91,7 @@ func (p *peripheral) DiscoverCharacteristics(cs []UUID, s *Service) ([]*Characte
 }
 
 func (p *peripheral) DiscoverDescriptors(ds []UUID, c *Characteristic) ([]*Descriptor, error) {
-	rsp := p.sendReq(69, xpc.Dict{
+	rsp := p.sendReq(70, xpc.Dict{
 		"kCBMsgArgDeviceUUID":                p.id,
 		"kCBMsgArgCharacteristicHandle":      c.h,
 		"kCBMsgArgCharacteristicValueHandle": c.vh,
@@ -108,7 +108,7 @@ func (p *peripheral) DiscoverDescriptors(ds []UUID, c *Characteristic) ([]*Descr
 }
 
 func (p *peripheral) ReadCharacteristic(c *Characteristic) ([]byte, error) {
-	rsp := p.sendReq(64, xpc.Dict{
+	rsp := p.sendReq(65, xpc.Dict{
 		"kCBMsgArgDeviceUUID":                p.id,
 		"kCBMsgArgCharacteristicHandle":      c.h,
 		"kCBMsgArgCharacteristicValueHandle": c.vh,
@@ -129,7 +129,7 @@ func (p *peripheral) WriteCharacteristic(c *Characteristic, b []byte, noRsp bool
 		"kCBMsgArgType":                      map[bool]int{false: 0, true: 1}[noRsp],
 	}
 	if noRsp {
-		p.sendCmd(65, args)
+		p.sendCmd(66, args)
 		return nil
 	}
 	rsp := p.sendReq(65, args)
@@ -140,7 +140,7 @@ func (p *peripheral) WriteCharacteristic(c *Characteristic, b []byte, noRsp bool
 }
 
 func (p *peripheral) ReadDescriptor(d *Descriptor) ([]byte, error) {
-	rsp := p.sendReq(76, xpc.Dict{
+	rsp := p.sendReq(77, xpc.Dict{
 		"kCBMsgArgDeviceUUID":       p.id,
 		"kCBMsgArgDescriptorHandle": d.h,
 	})
@@ -152,7 +152,7 @@ func (p *peripheral) ReadDescriptor(d *Descriptor) ([]byte, error) {
 }
 
 func (p *peripheral) WriteDescriptor(d *Descriptor, b []byte) error {
-	rsp := p.sendReq(77, xpc.Dict{
+	rsp := p.sendReq(78, xpc.Dict{
 		"kCBMsgArgDeviceUUID":       p.id,
 		"kCBMsgArgDescriptorHandle": d.h,
 		"kCBMsgArgData":             b,
