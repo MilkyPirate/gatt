@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/paypal/gatt/xpc"
+	"github.com/flemay/gatt/xpc"
 )
 
 type device struct {
@@ -402,7 +402,9 @@ func (d *device) HandleXpcEvent(event xpc.Dict, err error) {
 			go d.peripheralDiscovered(&peripheral{id: xpc.UUID(u.b), d: d}, a, rssi)
 		}
 
-	case 38: // PeripheralConnected
+	case
+		38, // PeripheralConnected
+		53: // Unhandled MTU by the original package once Blend is connected
 		u := UUID{args.MustGetUUID("kCBMsgArgDeviceUUID")}
 		p := &peripheral{
 			id:    xpc.UUID(u.b),
@@ -435,6 +437,7 @@ func (d *device) HandleXpcEvent(event xpc.Dict, err error) {
 	case // Peripheral events
 		54, // RSSIRead
 		55, // ServiceDiscovered
+		56, // ServiceDiscovered (based on noble package which works from my mac to Blend)
 		62, // IncludedServiceDiscovered
 		63, // CharacteristicsDiscovered
 		70, // CharacteristicRead

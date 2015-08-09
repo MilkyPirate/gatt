@@ -9,7 +9,7 @@ import (
 	"net"
 	"strings"
 
-	"github.com/paypal/gatt/linux"
+	"github.com/flemay/gatt/linux"
 )
 
 type peripheral struct {

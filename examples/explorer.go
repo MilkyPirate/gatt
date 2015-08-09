@@ -9,8 +9,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/paypal/gatt"
-	"github.com/paypal/gatt/examples/option"
+	"github.com/flemay/gatt"
+	"github.com/flemay/gatt/examples/option"
 )
 
 var done = make(chan struct{})

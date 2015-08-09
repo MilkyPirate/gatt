@@ -1,3 +1,15 @@
+> paypal/gatt didn't work with Mac OSX Yosemite and [Blend board](http://redbearlab.com/blend/) whereas [noble](https://github.com/sandeepmistry/noble) did.
+> Based on the noble file [yosemite.js](https://github.com/sandeepmistry/noble/blob/master/lib/mac/yosemite.js), I added some MTU requests/responses.
+
+> Impacted files
+> - github.com/flemay/gatt/device_darwin.go
+> - github.com/flemay/gatt/peripheral_darwin.go
+
+> MTU ids
+> - 53 peripheral connected response
+> - 45 discovered services request
+> - 56 discovered services response
+
 # Package gatt provides a Bluetooth Low Energy GATT implementation.
 
 Gatt (Generic Attribute Profile) is the protocol used to write BLE peripherals (servers) and centrals (clients).
@@ -43,7 +55,7 @@ either be run as root, or be granted appropriate capabilities:
     <executable>
 
 ## Usage
-Please see [godoc.org](http://godoc.org/github.com/paypal/gatt) for documentation.
+Please see [godoc.org](http://godoc.org/github.com/flemay/gatt) for documentation.
 
 ## Examples
 
@@ -96,8 +108,8 @@ OS X central, see http://stackoverflow.com/questions/20553957.
 
 ## Known Issues
 
-Currently OS X vesion  does not support subscribing to indications. 
-Please check [#32](https://github.com/paypal/gatt/issues/32) for the status of this issue.
+Currently OS X vesion  does not support subscribing to indications.
+Please check [#32](https://github.com/flemay/gatt/issues/32) for the status of this issue.
 
 ## REFERENCES
 

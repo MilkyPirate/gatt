@@ -3,7 +3,7 @@ package gatt
 import (
 	"log"
 
-	"github.com/paypal/gatt/xpc"
+	"github.com/flemay/gatt/xpc"
 )
 
 type peripheral struct {
@@ -35,7 +35,7 @@ func (p *peripheral) Name() string         { return p.name }
 func (p *peripheral) Services() []*Service { return p.svcs }
 
 func (p *peripheral) DiscoverServices(ss []UUID) ([]*Service, error) {
-	rsp := p.sendReq(44, xpc.Dict{
+	rsp := p.sendReq(45, xpc.Dict{
 		"kCBMsgArgDeviceUUID": p.id,
 		"kCBMsgArgUUIDs":      uuidSlice(ss),
 	})
@@ -191,7 +191,7 @@ func (p *peripheral) SetNotifyValue(c *Characteristic, f func(*Characteristic, [
 
 func (p *peripheral) SetIndicateValue(c *Characteristic,
 	f func(*Characteristic, []byte, error)) error {
-	// TODO: Implement set indications logic for darwin (https://github.com/paypal/gatt/issues/32)
+	// TODO: Implement set indications logic for darwin (https://github.com/flemay/gatt/issues/32)
 	return nil
 }
 
