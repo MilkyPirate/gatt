@@ -178,12 +178,13 @@ func (p *peripheral) SetNotifyValue(c *Characteristic, f func(*Characteristic, [
 		// Note: when notified, core bluetooth reports characteristic handle, not value's handle.
 		p.sub.subscribe(c.h, func(b []byte, err error) { f(c, b, err) })
 	}
-	rsp := p.sendReq(67, xpc.Dict{
+	rsp := p.sendReq(68, xpc.Dict{
 		"kCBMsgArgDeviceUUID":                p.id,
 		"kCBMsgArgCharacteristicHandle":      c.h,
 		"kCBMsgArgCharacteristicValueHandle": c.vh,
 		"kCBMsgArgState":                     set,
 	})
+
 	if res := rsp.MustGetInt("kCBMsgArgResult"); res != 0 {
 		return attEcode(res)
 	}
@@ -250,13 +251,15 @@ func (p *peripheral) loop() {
 				return
 			}
 		}
+		log.Println("end go LOOP!")
 	}()
 
 	for {
+		log.Println("begin LOOP!")
 		select {
 		case rsp := <-p.rspc:
 			// Notification
-			if rsp.id == 70 && rsp.args.GetInt("kCBMsgArgIsNotification", 0) != 0 {
+			if rsp.id == 74 && rsp.args.GetInt("kCBMsgArgIsNotification", 0) != 0 {
 				// While we're notified with the value's handle, blued reports the characteristic handle.
 				ch := uint16(rsp.args.MustGetInt("kCBMsgArgCharacteristicHandle"))
 				b := rsp.args.MustGetBytes("kCBMsgArgData")
